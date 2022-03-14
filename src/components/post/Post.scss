@@ -1,0 +1,95 @@
+.post-container {
+  margin-bottom: 20px;
+  border: 1px solid #808080;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.post-header-author {
+  display: flex;
+  align-items: center;
+}
+
+.post-header-author__logo {
+  width: 50px;
+  border-radius: 50%;
+  border: 2px solid #DC143C;
+}
+
+.post-header-author__title {
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.add-post > img,
+.post-description__emoji > img {
+  cursor: pointer;
+}
+
+.add-post > img {
+  width: 20px;
+}
+
+.post-content {
+  padding: 0 10px 10px;
+  font-size: 0;
+}
+
+.post-img {
+  width: 100%;
+}
+
+.post-description__emoji {
+  padding: 10px 0;
+}
+
+.post-description__emoji > img {
+  width: 24px;
+}
+
+.post-description__title, 
+.post-commets__title {
+  font-size: 16px;
+}
+
+.post-description__title, 
+.post-description__text {
+  margin-bottom: 8px;
+}
+
+.post-commets__title {
+  margin-bottom: 5px;
+}
+
+.post-comment {
+  margin-bottom: 5px;
+}
+
+.post-description__text,
+.post-comment__author, 
+.post-comment__text  {
+  font-size: 14px;
+}
+
+.post-comment__author {
+  color: #000000;
+  font-weight: bold;
+  margin-right: 3px
+}
+
+.post-description__text, 
+.post-comment__text {
+  color: #808080;
+} 
+
+.add-comment {
+  width: 100%;
+  padding: 10px 5px;
+  border-radius: 5px;
+  border: 1px solid #808080;
+}
