@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import PostsContainer from './components/postsContainer/PostsContainer';
+import PostsContainer from './components/PostsContainer/PostsContainer';
 import Header from './components/Header/Header';
 import './App.scss';
 
