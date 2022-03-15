@@ -2,7 +2,7 @@ import React from 'react'
 import './Header.scss'
 
 function Header(props) {
-  const {onAddNewPost} = props;
+  const { handlerModalWindow } = props;
 
   return (
     <header className="header">
@@ -13,7 +13,7 @@ function Header(props) {
             className="add-post__logo" 
             src="https://cdn2.iconfinder.com/data/icons/social-productivity-line-art-2/128/add-256.png" 
             alt="add-post"
-            onClick={() => onAddNewPost()}  
+            onClick={() => handlerModalWindow()}  
           />
         </div>
       </div>

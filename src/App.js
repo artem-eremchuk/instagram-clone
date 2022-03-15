@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import PostsContainer from './components/PostsContainer/PostsContainer';
 import Header from './components/Header/Header';
+import ModalWindow from './components/ModalWindow/ModalWindow.js'
 import './App.scss';
 
 const initialPosts = [
@@ -71,13 +72,14 @@ const initialPosts = [
 
 function App() {
   const [posts, setPosts] = useState(JSON.parse(localStorage.getItem("posts")) || initialPosts);
+  const [hideModalWindos, setHideModalWindow] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("posts", JSON.stringify(posts))
   }, [posts])
 
-  const addNewPost = (post) => {
-    console.log("post")
+  const handlerModalWindow = () => {
+    setHideModalWindow(!hideModalWindos);
   }
 
   const changeLikeMark = (id) => {
@@ -116,10 +118,34 @@ function App() {
     setPosts(newPosts);
   }
 
+  const addNewPost = (linkImg, description) => {
+    const postsClone = structuredClone(posts);
+
+    const newPost = {
+      'id': Date.now(),
+      'user_name': 'admin',
+      'user_avatar': 'https://visualpharm.com/assets/451/Admin-595b40b65ba036ed117d286d.svg',
+      'main_img': linkImg,
+      'like_mark': false,
+      'description': description,
+      'comments': []
+    }
+
+    const newPosts = [...postsClone, newPost];
+
+    setPosts(newPosts)
+  }
+
   return (
     <>
+      {!hideModalWindos 
+        ? null 
+        : <ModalWindow 
+            handlerModalWindow={handlerModalWindow}
+            onAddNewPost={addNewPost}
+        />}
       <Header 
-        onAddNewPost={addNewPost}
+        handlerModalWindow={handlerModalWindow}
       />
       <PostsContainer 
         posts={posts}
