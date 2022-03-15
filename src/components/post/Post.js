@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Post.scss';
+import emptyHeart from '../../img/empty_heart.png'
+import fillHeart from '../../img/fill_heart.png'
 
 function Post(props) {
+  const [likeIcon, setLikeIcon] = useState(false);
+
   const {
     user_name, 
     user_avatar,
@@ -24,17 +28,20 @@ function Post(props) {
       <main className="post-content">
         <section className="post-description">
           <div className="post-description__emoji">
-            {/* <img src="https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/heart-love-like-likes-loved-favorite-256.png" alt="heart" /> */}
-            <img src="../../img/empty_heart.png" alt="heart" />
+            <img 
+              src={!likeIcon ? emptyHeart : fillHeart } 
+              alt="heart"
+              onClick={() => setLikeIcon(!likeIcon)} 
+            />
           </div>
-          <h3 className="post-description__title">{`${0} отметок "Нравится"`}</h3>
+          <h3 className="post-description__title">{`${!likeIcon ? 0 : 1} отметок "Нравится"`}</h3>
           <p className="post-description__text">
             {description}
           </p>
         </section>
         <section className="post-comments">
           <h3 className="post-commets__title">
-            {`Посмотреть все комментарии ${0}`}
+            {`Посмотреть все комментарии ${comments.length}`}
           </h3>
           {comments.map(comment => {
             const {id, comment_author, comment_text} = comment;
