@@ -4,10 +4,10 @@ import emptyHeart from '../../img/empty_heart.png'
 import fillHeart from '../../img/fill_heart.png'
 
 function Post(props) {
-  const [likeIcon, setLikeIcon] = useState(false);
-  const [newComment, setNewComment] = useState('')
+  const [likeIcon, setLikeIcon] = useState(props.post.like_mark);
+  const [newCommentText, setNewCommentText] = useState('')
 
-  const {post, onAddComment} = props;
+  const {post, onAddComment, onChangeLikeMark} = props;
 
   const {
     id,
@@ -17,8 +17,6 @@ function Post(props) {
     description,
     comments,
   } = post;
-
-  // console.log(newComment);
 
   return (
     <div className="post-container">
@@ -37,11 +35,14 @@ function Post(props) {
             <img 
               src={!likeIcon ? emptyHeart : fillHeart } 
               alt="heart"
-              onClick={() => setLikeIcon(!likeIcon)} 
+              onClick={() => {
+                setLikeIcon(!likeIcon)
+                onChangeLikeMark(id)
+              }} 
             />
           </div>
           <h3 className="post-description__title">
-            {`${!likeIcon ? 0 : 1} отметок "Нравится"`}
+            {`${!likeIcon ? `` : `${1} отметка нравится`}`}
           </h3>
           <p className="post-description__text">
             {description}
@@ -68,15 +69,15 @@ function Post(props) {
           <form 
             onSubmit={(e) => {
               e.preventDefault();
-              onAddComment(id, newComment);
-              setNewComment('');
+              onAddComment(id, newCommentText);
+              setNewCommentText('');
             }}>
             <input 
               className="add-comment" 
               type="text"
-              value={newComment} 
+              value={newCommentText} 
               placeholder='add comment'
-              onChange={(e) => setNewComment(e.target.value)}
+              onChange={(e) => setNewCommentText(e.target.value)}
             />
           </form>
         </section>

@@ -3,7 +3,7 @@ import Post from '../Post/Post';
 import './PostsContainer.scss';
 
 function PostsContainer(props) {
-  const {posts, onAddComment} = props;
+  const {posts, onAddComment, onChangeLikeMark} = props;
 
   const listPosts = posts.map(post => {
     return (
@@ -11,6 +11,7 @@ function PostsContainer(props) {
         key={post.id} 
         post={post}
         onAddComment={onAddComment} 
+        onChangeLikeMark={onChangeLikeMark}
       />
     )
   });
