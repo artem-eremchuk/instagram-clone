@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PostsContainer from './components/PostsContainer/PostsContainer';
 import Header from './components/Header/Header';
 import './App.scss';
@@ -67,12 +67,39 @@ const initialPosts = [
 ]
 
 function App() {
-  const [posts, setPosts] = useState(initialPosts);
+  const [posts, setPosts] = useState(JSON.parse(localStorage.getItem("posts")) || initialPosts);
+
+  useEffect(() => {
+    localStorage.setItem("posts", JSON.stringify(posts))
+  }, [posts])
+
+  const addComment = (postId, comment) => {
+    const  currentPost  = posts.find(post => post.id === postId);
+    const newPost = structuredClone(currentPost);
+
+    newPost.comments.push({
+      'id': Date.now(),
+      'comment_author': 'admin',
+      'comment_text': comment,
+    })
+
+    const newPosts = posts.map(post => {
+      if (post.id === postId) {
+        return newPost;
+      }
+      return post;
+    })
+    
+    setPosts(newPosts);
+  }
 
   return (
     <>
       <Header />
-      <PostsContainer posts={posts} />
+      <PostsContainer 
+        posts={posts}
+        onAddComment={addComment} 
+      />
     </>
   );
 }
