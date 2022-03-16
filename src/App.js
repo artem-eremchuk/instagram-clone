@@ -104,7 +104,7 @@ function App() {
 
     newPost.comments.push({
       'id': Date.now(),
-      'comment_author': 'admin',
+      'comment_author': 'dachshund',
       'comment_text': comment,
     })
 
@@ -123,8 +123,8 @@ function App() {
 
     const newPost = {
       'id': Date.now(),
-      'user_name': 'admin',
-      'user_avatar': 'https://visualpharm.com/assets/451/Admin-595b40b65ba036ed117d286d.svg',
+      'user_name': 'dachshund',
+      'user_avatar': 'https://images.vexels.com/media/users/3/213173/isolated/lists/c6137c02cac6b596b3cc3969719a040e-colored-cute-dachshund.png',
       'main_img': linkImg,
       'like_mark': false,
       'description': description,

@@ -1,55 +1,12 @@
-.modal-window-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  z-index: 2000;
-  background-color: rgba(0,0,0,0.4);
-}
+$close-button-color: tomato;
+$add-button-color: lime;
+$modal-window-bgc: rgba(0,0,0,0.4); 
+$modal-window-box-bgc: #ffffff;
 
-.modal-window-box {
-  display: flex;
-  flex: 0 0 30%;
-  flex-direction: column;
-  height: 70vh;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-}
-
-.modal-window-header {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 40px;
-}
-
-.modal-window__img-link {
-  padding: 10px;
-  margin-bottom: 20px;
-  font-size: 20px;
-}
-
-.modal-window__description {
-  height: 30%;
-  padding: 10px;
-  margin-bottom: 20px;
-  font-size: 20px;
-  resize: none;
-}
-
-.buttons-box {
-  text-align: center;
-}
-
-.modal-window-add,
-.modal-window-close {
+%button {
   cursor: pointer;
   border: 0;
-  background-color: tomato;
+  background-color: $close-button-color;
   padding: 10px 50px;
   border-radius: 5px;
   margin: 0px 10px;
@@ -57,6 +14,64 @@
   font-weight: bold;
 }
 
-.modal-window-add {
-  background-color: lime;
+@mixin input-style($p, $mb, $fz){
+  padding: $p;
+  margin-bottom: $mb;
+  font-size: $fz;
+}
+
+.modal-window {
+  &-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    background-color: $modal-window-bgc;
+    overflow: hidden;
+  }
+
+  &-box {
+    display: flex;
+    flex: 0 0 30%;
+    flex-direction: column;
+    height: 70vh;
+    background-color: $modal-window-box-bgc;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  &-header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 40px;
+  }
+
+  &__img-link {
+    @include input-style(10px, 20px, 20px);
+  }
+
+  &__description {
+    height: 30%;
+    @include input-style(10px, 20px, 20px);
+    resize: none;
+  }
+  
+  &-add, &-close {
+    @extend %button;
+  }
+
+  &-add {
+    background-color: $add-button-color;
+  }
+}
+
+.buttons {
+  &-box {
+    text-align: center;
+  }
 }
