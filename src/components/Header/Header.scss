@@ -9,16 +9,16 @@
   padding: 1vw;
   background-color: #ffffff;
   border-bottom: 1px solid #dbdbdb;
-}
+  
+  &-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 0 0 40%;
+    padding: 0px 5px;
+  }
 
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex: 0 0 40%;
-  padding: 0px 5px;
-}
-
-.header__logo {
-  font-size: 30px;
+  &__logo {
+    font-size: 2vw;
+  }
 }

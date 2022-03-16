@@ -49,7 +49,7 @@ function Post(props) {
           </p>
         </section>
         <section className="post-comments">
-          <h3 className="post-commets__title">
+          <h3 className="post-comments__title">
             {`Посмотреть все комментарии ${comments.length}`}
           </h3>
           {comments.map(comment => {
