@@ -18,18 +18,16 @@ function App() {
   }
 
   const changeLikeMark = (id) => {
-    const currentPost  = posts.find(post => post.id === id);
-    const newPost = {...currentPost}
+    const likedPostIndex = posts.findIndex(post => post.id === id);
 
-    newPost.liked = !newPost.liked;
-
-    const newPosts = posts.map(post =>
-      post.id === id 
-        ? newPost
-        : post
-    )
-    
-    setPosts(newPosts);
+    setPosts([
+      ...posts.slice(0, likedPostIndex),
+      {
+        ...posts[likedPostIndex],
+        liked: !posts[likedPostIndex].liked
+      },
+      ...posts.slice(likedPostIndex + 1),
+    ]);
   }
 
   const addComment = (postId, comment) => {
