@@ -2,25 +2,11 @@ import React from 'react'
 import Post from '../Post/Post';
 import './PostsContainer.scss';
 
-function PostsContainer(props) {
-  const {posts, onAddComment, onChangeLikeMark} = props;
-
-  const listPosts = posts.map(post => {
-    return (
-      <Post
-        key={post.id} 
-        post={post}
-        onAddComment={onAddComment} 
-        onChangeLikeMark={onChangeLikeMark}
-      />
-    )
-  });
-
-  return (
+const PostsContainer = ({ posts, ...postMethods }) =>
     <div className='posts-container'>
-      {listPosts}
+      {posts.map(post => (
+          <Post key={post.id} post={post} {...postMethods} />
+        ))}
     </div>
-  )
-}
 
 export default PostsContainer;

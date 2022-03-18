@@ -21,7 +21,8 @@ function ModalWindow(props) {
         />
         <textarea 
           name="" 
-          id="" className="modal-window__description"
+          id="" 
+          className="modal-window__description"
           placeholder='add description'
           value={textareaText}
           onChange={(e) => setTextareaText(e.target.value)} 
@@ -29,6 +30,7 @@ function ModalWindow(props) {
         <div className="buttons-box">
           <button 
             className="modal-window-add"
+            type='submit'
             onClick={(e) => {
               e.preventDefault();
               onAddNewPost(linkInputText, textareaText);  
@@ -40,10 +42,8 @@ function ModalWindow(props) {
           </button>
           <button 
             className="modal-window-close"
-            onClick={(e) => {
-              e.preventDefault();
-              handlerModalWindow();
-            }}>
+            onClick={handlerModalWindow}
+          >
               Close
           </button>
         </div>

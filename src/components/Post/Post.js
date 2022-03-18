@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
 import './Post.scss';
 import emptyHeart from '../../img/empty_heart.png'
-import fillHeart from '../../img/fill_heart.png'
+import filledHeart from '../../img/fill_heart.png'
 
 function Post(props) {
-  const [likeIcon, setLikeIcon] = useState(props.post.like_mark);
   const [newCommentText, setNewCommentText] = useState('')
 
   const {post, onAddComment, onChangeLikeMark} = props;
 
   const {
     id,
-    user_name, 
-    user_avatar,
-    main_img,
+    userName, 
+    userAvatar,
+    img,
+    liked,
     description,
     comments,
   } = post;
@@ -22,27 +22,24 @@ function Post(props) {
     <div className="post-container">
       <header className="post-header">
         <div className="post-header-author">
-          <img className="post-header-author__logo" src={user_avatar} alt="user-avatar" />
+          <img className="post-header-author__logo" src={userAvatar} alt="user-avatar" />
           <h2 className="post-header-author__title">
-            {user_name}
+            {userName}
           </h2>
         </div>
       </header>
-      <img className="post-img" src={main_img} alt="main-img"/>
+      <img className="post-img" src={img} alt="main-img"/>
       <main className="post-content">
         <section className="post-description">
           <div className="post-description__emoji">
             <img 
-              src={!likeIcon ? emptyHeart : fillHeart } 
+              src={liked ? filledHeart : emptyHeart} 
               alt="heart"
-              onClick={() => {
-                setLikeIcon(!likeIcon)
-                onChangeLikeMark(id)
-              }} 
+              onClick={() => onChangeLikeMark(id)} 
             />
           </div>
           <h3 className="post-description__title">
-            {`${!likeIcon ? `` : `${1} отметка нравится`}`}
+            {liked && '1 отметка нравится'}
           </h3>
           <p className="post-description__text">
             {description}
@@ -53,15 +50,15 @@ function Post(props) {
             {`Посмотреть все комментарии ${comments.length}`}
           </h3>
           {comments.map(comment => {
-            const {id, comment_author, comment_text} = comment;
+            const {id, commentAuthor, commentText} = comment;
 
             return (
               <div className="post-comment" key={id}>
                 <p className="post-comment__text"> 
                   <span className="post-comment__author">
-                    {comment_author}
+                    {commentAuthor}
                   </span>
-                    {comment_text}
+                    {commentText}
                 </p>
               </div>
             )

@@ -13,7 +13,7 @@ function Header(props) {
             className="add-post__logo" 
             src="https://cdn2.iconfinder.com/data/icons/social-productivity-line-art-2/128/add-256.png" 
             alt="add-post"
-            onClick={() => handlerModalWindow()}  
+            onClick={handlerModalWindow}  
           />
         </div>
       </div>
