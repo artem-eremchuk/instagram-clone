@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './Post.scss';
 import emptyHeart from '../../img/empty_heart.png'
 import filledHeart from '../../img/fill_heart.png'
+import { AppContext } from '../../App';
 
-function Post(props) {
+function Post({ post }) {
   const [newCommentText, setNewCommentText] = useState('')
-
-  const {post, onAddComment, onChangeLikeMark} = props;
+  const { 
+    changeLikeMark,
+    addComment
+  } = useContext(AppContext)
 
   const {
     id,
@@ -35,7 +38,7 @@ function Post(props) {
             <img 
               src={liked ? filledHeart : emptyHeart} 
               alt="heart"
-              onClick={() => onChangeLikeMark(id)} 
+              onClick={() => changeLikeMark(id)} 
             />
           </div>
           <h3 className="post-description__title">
@@ -66,7 +69,7 @@ function Post(props) {
           <form 
             onSubmit={(e) => {
               e.preventDefault();
-              onAddComment(id, newCommentText);
+              addComment(id, newCommentText);
               setNewCommentText('');
             }}>
             <input 

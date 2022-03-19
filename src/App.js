@@ -1,9 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext, useCallback } from 'react';
 import PostsContainer from './components/PostsContainer/PostsContainer';
 import Header from './components/Header/Header';
 import ModalWindow from './components/ModalWindow/ModalWindow.js'
 import './App.scss';
 import { initialPosts } from './models/initialPosts'
+
+export const AppContext = createContext({
+  posts: [],
+  modalOpened: false,
+  changeLikeMark: () => {},
+  addComment: () => {},
+  addNewPost: () => {},
+  setModalOpened: () => {}
+})
 
 function App() {
   const [posts, setPosts] = useState(JSON.parse(localStorage.getItem("posts")) || initialPosts);
@@ -13,11 +22,7 @@ function App() {
     localStorage.setItem("posts", JSON.stringify(posts))
   }, [posts])
 
-  const handlerModalWindow = () => {
-    setModalOpened(!modalOpened);
-  }
-
-  const changeLikeMark = (id) => {
+  const changeLikeMark = useCallback((id) => {
     const likedPostIndex = posts.findIndex(post => post.id === id);
 
     setPosts([
@@ -28,9 +33,9 @@ function App() {
       },
       ...posts.slice(likedPostIndex + 1),
     ]);
-  }
+  }, [posts])
 
-  const addComment = (postId, comment) => {
+  const addComment = useCallback((postId, comment) => {
     const currentPost = posts.find(post => post.id === postId);
 
     const newPost = {
@@ -53,7 +58,7 @@ function App() {
     )
     
     setPosts(newPosts);
-  }
+  }, [posts])
 
   const addNewPost = (img, description) => {
     setPosts([
@@ -76,23 +81,21 @@ function App() {
     });
   }
 
+  const providedValues = {
+    posts,
+    changeLikeMark,
+    addComment,
+    addNewPost,
+    modalOpened,
+    setModalOpened
+  }
+
   return (
-    <>
-      {modalOpened && (
-        <ModalWindow 
-          handlerModalWindow={handlerModalWindow}
-          onAddNewPost={addNewPost}
-        />
-      )}
-      <Header 
-        handlerModalWindow={handlerModalWindow}
-      />
-      <PostsContainer 
-        posts={posts}
-        onAddComment={addComment} 
-        onChangeLikeMark={changeLikeMark}
-      />
-    </>
+    <AppContext.Provider value={providedValues}>
+      {modalOpened && <ModalWindow />}
+      <Header />
+      <PostsContainer />
+    </AppContext.Provider>
   );
 }
 

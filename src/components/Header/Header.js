@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AppContext } from '../../App';
 import './Header.scss'
 
-function Header(props) {
-  const { handlerModalWindow } = props;
+function Header() {
+  const { setModalOpened } = useContext(AppContext)
 
   return (
     <header className="header">
@@ -13,7 +14,7 @@ function Header(props) {
             className="add-post__logo" 
             src="https://cdn2.iconfinder.com/data/icons/social-productivity-line-art-2/128/add-256.png" 
             alt="add-post"
-            onClick={handlerModalWindow}  
+            onClick={() => setModalOpened(true)}  
           />
         </div>
       </div>

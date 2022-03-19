@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AppContext } from '../../App';
 import './ModalWindow.scss';
 
-function ModalWindow(props) {
+function ModalWindow() {
   const [linkInputText, setLinkInputText] = useState('');
   const [textareaText, setTextareaText] = useState('');
-
-
-  const { handlerModalWindow, onAddNewPost } = props;
+  const { addNewPost, setModalOpened } = useContext(AppContext)
 
   return (
     <div className='modal-window-wrapper'>
@@ -33,16 +32,16 @@ function ModalWindow(props) {
             type='submit'
             onClick={(e) => {
               e.preventDefault();
-              onAddNewPost(linkInputText, textareaText);  
+              addNewPost(linkInputText, textareaText);  
               setLinkInputText('');        
               setTextareaText('');
-              handlerModalWindow();        
+              setModalOpened(false)    
             }}>
             Add
           </button>
           <button 
             className="modal-window-close"
-            onClick={handlerModalWindow}
+            onClick={() => setModalOpened(false)}
           >
               Close
           </button>
