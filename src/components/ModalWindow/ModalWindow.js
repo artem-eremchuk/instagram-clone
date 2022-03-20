@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react';
-import { AppContext } from '../../App';
+import { FeedContext } from '../../components/Pages/Feed/Feed';
 import './ModalWindow.scss';
 
 function ModalWindow() {
   const [linkInputText, setLinkInputText] = useState('');
   const [textareaText, setTextareaText] = useState('');
-  const { addNewPost, setModalOpened } = useContext(AppContext)
+  const { addNewPost, setModalOpened } = useContext(FeedContext)
 
   return (
     <div className='modal-window-wrapper'>

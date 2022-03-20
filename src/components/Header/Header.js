@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import { AppContext } from '../../App';
+import { FeedContext } from '../../components/Pages/Feed/Feed';
 import './Header.scss'
 
 function Header() {
-  const { setModalOpened } = useContext(AppContext)
+  const { setModalOpened } = useContext(FeedContext)
 
   return (
     <header className="header">

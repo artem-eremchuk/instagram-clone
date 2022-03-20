@@ -2,14 +2,14 @@ import React, { useState, useContext } from 'react'
 import './Post.scss';
 import emptyHeart from '../../img/empty_heart.png'
 import filledHeart from '../../img/fill_heart.png'
-import { AppContext } from '../../App';
+import { FeedContext } from '../../components/Pages/Feed/Feed';
 
 function Post({ post }) {
   const [newCommentText, setNewCommentText] = useState('')
   const { 
     changeLikeMark,
     addComment
-  } = useContext(AppContext)
+  } = useContext(FeedContext)
 
   const {
     id,
