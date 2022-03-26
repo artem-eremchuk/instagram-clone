@@ -1,0 +1,19 @@
+.login-window-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+
+.login-input {
+    padding: 5px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}

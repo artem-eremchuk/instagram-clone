@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min"
 import { AppContext } from "../../../App";
+import { setCookie } from '../../../utils/cookies'
+import './Login.scss'
 
 const Login = () => {
     const history = useHistory();
-    const { setLogin } = useContext(AppContext);
+    const { setLoggedIn } = useContext(AppContext);
     const [loginValues, setLoginValues] = 
       useState({
         username: '', 
@@ -15,36 +17,32 @@ const Login = () => {
 
     return (
       <div className="login-window-wrapper">
-        <form onSubmit={e => {
+        <form className="login-form" onSubmit={e => {
             e.preventDefault();
 
             if (username === 'root' && password === 'root') {
-              setLogin(true)
+              setLoggedIn(true)
               history.push('/feed')
+              setCookie('sessionId', 'cd833f451d0d731fb2de02f0fe0deb5d', {
+                'max-age': 3600
+              })
             }
-
-            setLoginValues({
-              username: '', 
-              password: ''
-            })
-
-            document.cookie = 'sessionId=cd833f451d0d731fb2de02f0fe0deb5d; max-age=3600'
         }}>
           <input 
-            className="login-window-username"
+            className="login-input"
             value={loginValues.username}
             onChange={(e) => setLoginValues({
+              ...loginValues,
               username: e.target.value,
-              password: loginValues.password
             })}
             type="text" 
             placeholder="username" 
           />
           <input 
-            className="login-window-password"
+            className="login-input"
             value={loginValues.password}
             onChange={(e) => setLoginValues({
-              username: loginValues.username,
+              ...loginValues,
               password: e.target.value
             })}
             type="password" 

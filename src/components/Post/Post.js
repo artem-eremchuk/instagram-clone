@@ -2,14 +2,23 @@ import React, { useState, useContext } from 'react'
 import './Post.scss';
 import emptyHeart from '../../img/empty_heart.png'
 import filledHeart from '../../img/fill_heart.png'
-import { FeedContext } from '../../components/Pages/Feed/Feed';
+import { AppContext } from '../../App';
+import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function Post({ post }) {
   const [newCommentText, setNewCommentText] = useState('')
   const { 
     changeLikeMark,
+    posts,
     addComment
-  } = useContext(FeedContext)
+  } = useContext(AppContext)
+
+  const params = useParams()
+  const history = useHistory()
+
+  const openedPost = posts.find(x => x.id === params.id)
 
   const {
     id,
@@ -19,7 +28,7 @@ function Post({ post }) {
     liked,
     description,
     comments,
-  } = post;
+  } = post || openedPost;
 
   return (
     <div className="post-container">
@@ -31,7 +40,14 @@ function Post({ post }) {
           </h2>
         </div>
       </header>
-      <img className="post-img" src={img} alt="main-img"/>
+      <img 
+        className="post-img"
+        src={img}
+        alt="main-img"
+        onClick={() => history.push(`/post/${id}`, { 
+          data: 'nothing'
+        })}  
+      />
       <main className="post-content">
         <section className="post-description">
           <div className="post-description__emoji">

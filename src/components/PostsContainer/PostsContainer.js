@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import Post from '../Post/Post';
 import './PostsContainer.scss';
-import { FeedContext } from '../../components/Pages/Feed/Feed';
+import { AppContext } from '../../App';
 
 const PostsContainer = () => {
-  const { posts } = useContext(FeedContext)
+  const { posts } = useContext(AppContext)
 
   return (
     <div className='posts-container'>
